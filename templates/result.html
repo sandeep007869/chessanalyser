@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moves Table</title>
+</head>
+<body>
+
+<h2>Game Moves</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Move No.</th>
+        <th>Move</th>
+    </tr>
+
+    {% for move in moves %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ move }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
