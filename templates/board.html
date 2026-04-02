@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Analyzer</title>
+
+    <!-- Chessboard CSS -->
+    <link rel="stylesheet"
+    href="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        #board {
+            width: 400px;
+        }
+
+        .moves {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .move {
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .move:hover {
+            background: #eee;
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Chess Analyzer</h2>
+
+<div class="container" action="/analysis">
+    
+    <!-- Chessboard -->
+    <div>
+        <div id="board"></div>
+
+        <div class="controls">
+            <button onclick="firstMove()">Start</button>
+            <button onclick="prevMove()">Back</button>
+            <button onclick="nextMove()">Next</button>
+            <button onclick="lastMove()">End</button>
+        </div>
+    </div>
+
+    <!-- Moves list -->
+    <div class="moves" id="movesList">
+        Loading moves...
+    </div>
+
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Chessboard.js -->
+<script src="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
+<script>
+let board;
+let moves = [];
+let currentIndex = 0;
+
+// Initialize board
+document.addEventListener("DOMContentLoaded", function() {
+    board = Chessboard('board', {
+        position: 'start'
+    });
+
+    loadMoves();
+});
+
+// Fetch moves from Flask
+function loadMoves() {
+    fetch('/analysis')
+    .then(res => res.json())
+    .then(data => {
+        moves = data;
+
+        if (moves.length > 0) {
+            board.position(moves[0].fen);
+            renderMoves();
+        }
+    });
+}
+
+// Render move list
+function renderMoves() {
+    let container = document.getElementById("movesList");
+    container.innerHTML = "";
+
+    moves.forEach((m, index) => {
+        let div = document.createElement("div");
+        div.className = "move";
+        div.innerText = (index + 1) + ". " + m.move;
+
+        div.onclick = function() {
+            goToMove(index);
+        };
+
+        container.appendChild(div);
+    });
+}
+
+// Navigation functions
+function nextMove() {
+    if (currentIndex < moves.length - 1) {
+        currentIndex++;
+        board.position(moves[currentIndex].fen);
+    }
+}
+
+function prevMove() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        board.position(moves[currentIndex].fen);
+    }
+}
+
+function firstMove() {
+    currentIndex = 0;
+    board.position(moves[0].fen);
+}
+
+function lastMove() {
+    currentIndex = moves.length - 1;
+    board.position(moves[currentIndex].fen);
+}
+
+function goToMove(index) {
+    currentIndex = index;
+    board.position(moves[index].fen);
+}
+
+// Resize fix
+window.addEventListener('resize', function() {
+    if (board) board.resize();
+});
+</script>
+
+</body>
+</html>

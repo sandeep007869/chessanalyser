@@ -85,5 +85,11 @@ def upload():
     return render_template("result.html", moves=moves_list)
 
 
+@app.route("/analysis")
+def analysis():
+    return render_template("board.html")
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
