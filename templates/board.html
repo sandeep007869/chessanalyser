@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Analyzer</title>
+
+    
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard.min.css') }}">
+    <style>
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                }
+        }
+         body {
+            font-family: Arial;
+            padding: 20px;
+        }
+                button {
+            border: none;
+            border-radius: 8px;
+            background: #ff8000;
+            color: white;
+            padding: 8px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        button:hover {
+            background: #a05e01;
+            transform: scale(1.05);
+        }
+
+       .container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        #board {
+            width: 100%;
+            max-width: 650px;   
+            aspect-ratio: 1/1; 
+        }
+
+        .moves {
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            display: block;
+        }
+        .move {
+            cursor: pointer;
+            padding: 5px;
+        }
+        .moves thead{
+            text-align: left;
+            position: sticky;
+        }
+
+        .move:hover {
+            background: #eee;
+        }
+
+        
+
+        button {
+            justify-content: center;
+            gap: 12px;
+
+        }
+        h1{
+            color:brown;
+            text-shadow : 2px 2px 4px #898989;
+            text-align: center;
+          
+        }
+        .moves-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 5%;
+        }
+        .movediv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 40%;
+            width: 90%;
+            max-width: 290px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h1><B>CHESS ANALYZER</B></h1>
+
+<div class="container" action="/board" method="post" enctype="multipart/form-data">
+    
+    <!-- Chessboard -->
+    <div>
+        <div id="board" style="height:40vw ;width: 40vw;"></div>  
+    </div>
+
+    <!-- Moves list -->
+    <div class="movediv">
+        <table id="movesList" class="moves">
+        <thead>
+            <tr>  
+                <th>Move</th> 
+                <th>WHITE</th>
+                <th>BLACK</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        </table>
+        <div class="controls">
+            <button onclick="firstMove()"><<</button>
+            <button onclick="prevMove()"><</button>
+            <button onclick="nextMove()">></button>
+            <button onclick="lastMove()">>></button>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/chessboard.min.js') }}"></script> -->
+<!-- Chessboard.js -->
+<script src="{{ url_for('static', filename='js/chessboard.min.js') }}"></script>
+<script>
+let board;
+let moves = [];
+let currentIndex = 0;
+
+// Initialize board
+document.addEventListener("DOMContentLoaded", function() {
+   board = Chessboard('board', {
+    position: 'start',
+    pieceTheme: '/static/pieces/{piece}.png'
+    });
+
+    loadMoves();
+});
+
+// Fetch moves from Flask
+function loadMoves() {
+    fetch('/analysis')
+    .then(res => res.json())
+    .then(data => {
+        moves = data;
+
+        if (moves.length > 0) {
+            board.position(moves[0].fen);
+            renderMoves();
+        }
+    });
+}
+
+// Render move list
+function renderMoves() {
+    let tbody = document.querySelector("#movesList tbody" );
+    tbody.innerHTML = "";
+
+    for (let i = 0; i < moves.length; i += 2) {
+        let row = document.createElement("tr");
+
+        // Move number
+        let moveNo = document.createElement("td");
+        moveNo.innerText = (i / 2 + 1) + ".";
+        row.appendChild(moveNo);
+
+        // White move
+        let whiteMove = document.createElement("td");
+        whiteMove.classList.add("move");
+        whiteMove.innerText = moves[i].move + getSymbol(moves[i].tag);
+        applyColor(whiteMove, moves[i].tag);
+        if (moves[i].tag) whiteMove.innerText += " " ;
+        whiteMove.onclick = function() {
+            goToMove(i);
+        };
+        row.appendChild(whiteMove);
+
+        // Black move
+        let blackMove = document.createElement("td");
+        if (moves[i + 1]) {
+            blackMove.classList.add("move");
+           blackMove.innerText = moves[i + 1].move + getSymbol(moves[i + 1].tag);
+            applyColor(blackMove, moves[i + 1].tag);
+            if (moves[i + 1].tag) blackMove.innerText += " " ;
+            blackMove.onclick = function() {
+                goToMove(i + 1);
+            };
+        }
+        row.appendChild(blackMove);
+        
+        tbody.appendChild(row);
+
+
+    }
+
+        // Add symbols based on tag
+        function getSymbol(tag) {
+            if (tag === "blunder") return " ❌❌";
+            else if (tag === "mistake") return " ❌";
+            else if (tag === "inaccuracy") return " ❓";
+            else if (tag === "good") return " ✅";
+            else if (tag === "best") return " 🌟";
+            else return "";
+        }
+        function applyColor(el, tag) {
+            if (tag === "best") el.style.color = "darkgreen";
+            else if (tag === "good") el.style.color = "green";
+            else if (tag === "inaccuracy") el.style.color = "#b59f00";
+            else if (tag === "mistake") el.style.color = "orange";
+            else if (tag === "blunder") el.style.color = "red";
+        }   
+    };
+
+
+
+// Navigation functions
+function nextMove() {
+    if (currentIndex < moves.length - 1) {
+        goToMove(currentIndex + 1);
+    }
+}
+
+function prevMove() {
+    if (currentIndex > 0) {
+        goToMove(currentIndex - 1);
+    }
+}
+
+function firstMove() {
+    goToMove(0);
+}
+
+function lastMove() {
+    goToMove(moves.length - 1);
+}
+
+function goToMove(index) {
+    currentIndex = index;
+    board.position(moves[index].fen);
+
+    // remove old highlight
+    document.querySelectorAll("#movesList td").forEach(el => el.style.background = "");
+
+    // highlight correct cell
+    let rowIndex = Math.floor(index / 2);
+    let colIndex = (index % 2) + 1; // 1 = white, 2 = black
+
+    let row = document.querySelectorAll("#movesList tbody tr")[rowIndex];
+    if (row && row.children[colIndex]) {
+        row.children[colIndex].style.background = "#ddd";
+    }
+}
+// Resize fix
+window.addEventListener('resize', function() {
+    if (board) board.resize();
+});
+</script>
+
+</body>
+</html>
