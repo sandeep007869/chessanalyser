@@ -16,10 +16,15 @@
             font-family: Arial;
             padding: 20px;
         }
+        .body{
+            background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
                 button {
             border: none;
             border-radius: 8px;
-            background: #ff8000;
+            background:rgb(98, 36, 0);
             color: white;
             padding: 8px 14px;
             font-size: 14px;
@@ -37,19 +42,28 @@
             gap: 20px;
             align-items: flex-start;
             flex-wrap: wrap;
+            background-color: blanchedalmond;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-color:rgb(98, 36, 0);
+            border-style: solid ;
+            border-width: 0.1vw;
+            border-radius: 1.5vw;
         }
 
         #board {
             width: 100%;
-            max-width: 650px;   
+            max-width: 600px;   
             aspect-ratio: 1/1; 
+            padding: 3vw;
         }
 
         .moves {
             width: 100%;
-            max-height: 400px;
+            height: 100%;
             overflow-y: auto;
             display: block;
+            padding-top: 3vwS;
+            border-radius: 0.5vw;
         }
         .move {
             cursor: pointer;
@@ -61,7 +75,7 @@
         }
 
         .move:hover {
-            background: #eee;
+            background: rgba(104, 3, 3, 0.232);
         }
 
         
@@ -71,11 +85,12 @@
             gap: 12px;
 
         }
-        h1{
-            color:brown;
-            text-shadow : 2px 2px 4px #898989;
+         h3{
+            color:rgb(98, 36, 0);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 3vw;
             text-align: center;
-          
+            margin: auto;
         }
         .moves-section {
             display: flex;
@@ -87,26 +102,33 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 5%;
             margin-top: 5%;
         }
         .movediv {
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 40%;
-            width: 90%;
-            max-width: 290px;
+            background-color: rgb(198, 189, 185);
+            max-width: 20vw;
+            max-height: 40vw;
+            aspect-ratio: 1/2;
+            margin-top: 3vw; 
+            padding: 0.5vw;
+            border-color:rgb(98, 36, 0);
+            border-radius: 1vw;
+            
         }
 
     </style>
 </head>
 
-<body>
+<body Class="body">
 
-<h1><B>CHESS ANALYZER</B></h1>
+<h3><B>RESULT</B></h3>
 
 <div class="container" action="/board" method="post" enctype="multipart/form-data">
+    <p>hello everyone here we will put someinfo about <br>something or may be here</p>
     
     <!-- Chessboard -->
     <div>
@@ -118,7 +140,7 @@
         <table id="movesList" class="moves">
         <thead>
             <tr>  
-                <th>Move</th> 
+                <th>MOVE</th> 
                 <th>WHITE</th>
                 <th>BLACK</th>
             </tr>
