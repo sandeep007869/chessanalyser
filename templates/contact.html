@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
+            background-size: 100vw 100vh;
+            background-position: top;
+            background-repeat: no-repeat;
+        }
+        nav{
+            width: 100%;
+            margin-left: 0; 
+            height: 8vh;          
+        }
+         ul{ 
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: 8vh;
+            overflow: hidden;
+            background-color: black; 
+        }
+        li{ 
+            float: right;
+            padding: 8px;
+            margin-top: 2vh;
+            margin-right: 3%;
+            min-height: 1vw;
+            max-height: 3vw;
+            border-radius: 12px;
+            text-align: center;  
+        } 
+        li a{
+            text-decoration: none;
+            color: white;
+            font-size: 1vw;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        li:hover{
+            background-color:rgba(255, 255, 255, 0.5);
+        }
+        li:hover a{
+            color:black;
+        }
+        .sitename{
+            float: left;
+            display: flex;
+            align-items: center;
+            padding-top: 0vh;
+            padding-bottom: 0.5vh;
+            padding-left: 2vw;
+            padding-right: 2vw;
+            color: white;
+            font-size: 1.2vw;
+            margin-top: 1.5vh;
+        }
+        .sitename:hover{
+            background-color:black;
+            color:white;
+        }
+        .sitelogo{
+            width: 2.8vw;
+            height: 2.8vw;
+            margin-right: 1vw;
+            border-radius: 1vh;
+        }
+         .container{
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.5);
+            height:82vh;
+            width: 95vw;
+            border:0.1vh solid black;
+            border-bottom-right-radius: 2vw;
+            border-bottom-left-radius: 2vw;
+            overflow-y: scroll;
+            margin: auto;
+        }
+         .container::-webkit-scrollbar {
+             scrollbar-width: thin;
+            scrollbar-color: black transparent;}
+        h3{
+            color:black;
+            width: 95vw;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 2vw;
+            text-align: center;
+            margin: auto;
+            margin-top: 2vh;
+            background-color:rgba(255, 255, 255, 0.8);
+            border:1px solid black;
+            border-top-right-radius: 2vw;
+            border-top-left-radius: 2vw;
+        }
+        dl dt{
+            color:black;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 1.8vw;
+            font-weight: bold;
+            margin-left: 5vw;
+            margin-top: 2vh;
+        }
+        dl dd{
+            color:black;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 1.4vw;
+            margin-left: 8vw;
+            margin-top: 1vh;
+            margin-bottom: 2vh;
+            
+            
+        }
+        .listul{
+            list-style-type: list;
+            margin-bottom: 1vh;
+            margin-top: 1vh;
+            padding: 0;
+            height: 10vh;
+           background-color: rgba(255, 255, 255, 0.0) ;
+        }
+        .listitem{
+            padding: 0.3vw;
+            margin-top: 0.1vh;
+            margin-bottom: 0.1vh;
+            float: none;
+            min-height: 1vw;
+            max-height: 1vw;
+            text-align: left;
+        }
+        .listitem:hover {
+            background-color: rgba(255, 255, 255, 0.0);
+        }
+        .dd1{
+            font-size: 1.4vw;
+            font-weight: bold;
+            margin-left: 3vw;
+        }
+        body {
+        opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+         }
+
+        @keyframes fadeIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+</style>
+</head>
+<body>
+    <nav>
+    <ul>       
+        <li><a href="{{url_for('contact') }}">ABOUT</a></li>
+        <li><a href="{{url_for('rules') }}">RULES</a></li>
+        <li><a href="{{url_for('pgnguide') }}">PGN-GUIDE</a></li>
+        <li><a href="{{url_for('homepage') }}">HOME</a></li>
+        <li class="sitename"><img class="sitelogo" src="{{ url_for('static', filename='pieces/cheslogoc.png') }}" ><h2>CHESS GAME ANALYZER</h2></li>
+    </ul>
+</nav>
+    <h3>ABOUT THIS WEBSITE</h3>
+
+    <div class="container">
+<dl>
+    <dd class="dd1">This is a Chess Game Analyzer that evaluates moves from a PGN file using an engine.
+It classifies moves as best, good, mistake, or blunder to help users improve their gameplay.</dd>
+
+    <dt>PURPOSE</dt>
+    <dd>The goal of this project is to simplify chess analysis for beginners and provide clear insights into their games.</dd>
+
+    <dt>FEATURES</dt>
+    <dd><ul class="listul">
+  <li class="listitem">Upload or paste PGN files</li>
+  <li class="listitem">Move-by-move analysis</li>
+  <li class="listitem">Simple and clean interface</li>
+</ul></dd>
+
+    <dt>TECHNOLOGIES USED</dt>
+    <dd><ul class="listul">
+  <li class="listitem">Python (Flask)</li>
+  <li class="listitem">HTML, CSS</li>
+  
+</ul></dd>
+
+    <dt>FUTURE IMPROVEMENT</dt>
+    <dd><ul class="listul">
+  <li class="listitem">Add accuracy score</li>
+  <li class="listitem">Improve UI and design</li>
+  <li class="listitem">Add user accounts</li>
+</ul></dd>
+
+</dl>
+    </div>
+</body>
+</html>

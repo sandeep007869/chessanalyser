@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHESS GAME ANALYZER</title>
+<style>
+    body{
+      background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
+            background-size: 100vw 100vh;
+            background-position: top;
+            background-repeat: no-repeat;
+}
+    h2{
+            color:white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 3vw;
+            margin-top: 0.2vw;
+            background-color:black;
+            
+        } 
+    .container{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        align-items: top;
+        height:80vh;
+        width: 99vw;
+    }
+    button{
+            border: none;
+            border-radius: 8px;
+            background:black;
+            height: 6vh;
+            width: 22vw;
+            margin-top: 2vw;
+            max-width: 22vw;
+            max-height: 6vh;
+            color: white;
+            padding: 8px 14px;
+            font-size: 1.1vw;
+            cursor: pointer;
+            transition: 0.1s;   
+        }
+        button:hover{
+            background: lightgray;
+            transform: scale(1.05);
+            color: black;
+        }
+        .txt{
+            height: 40vh;
+            width:60vw;
+            margin-top: 5vw;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .txti{
+            height:35vh;
+            width:18vw;
+            float: left;
+            display: flex;
+            flex-direction: column;
+            margin-left: 1vw;
+            margin-top: 2vh;
+            
+        }
+        .txtid{
+            height: 16vh;
+            width:18vw;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 2vw;
+            margin-top:1vh ;
+            border: .1vw solid black;
+            font-size: 1.7vw;
+            text-align: center; 
+            font-weight: bold;   
+        }
+        .smaller1{
+            font-size: 1.2vw;
+            font-weight: normal;
+        }
+        .sitename{
+            height: 4vw;
+            width: 100vw;
+            display: flex;
+            flex-direction: row;
+            background-color: black;
+        }
+        .sitelogo{
+            width: 3vw;
+            height: 3vw;
+            margin-right: 1vw;
+            margin-top: 0.2vw;
+            margin-left:27.5vw;
+            border-radius: 1vh;
+        }
+        body {
+        opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+         }
+
+        @keyframes fadeIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+</style>
+</head>
+<body>
+   <div class="sitename"><img class="sitelogo" src="{{ url_for('static', filename='pieces/cheslogoc.png') }}" ><h2>CHESS GAME ANALYZER</h2></div>
+    <div class ="container">
+        <div class="txt">
+            <div class="txti">
+                <div class="txtid">
+                    <p>Analyze Your Game</p>
+                    <p class="smaller1">Free ,Fast and Accurate</p1>
+                </div>
+                <div class="txtid">
+                    <p>Clear Move Insights</p>
+                    <p class="smaller1">Labels Every Move With Symbols</p1>
+                </div>
+            </div>
+            <div class="txti">
+            <div class="txtid">
+                <p>Upload PGN Easily</p>
+                <p class="smaller1">Upload PGN From Anywhere </p1>
+            </div>
+            <div class="txtid">
+                <p>Beginner Friendly</p>
+                <p class="smaller1">Just Upload And Analyze</p1>
+            </div>
+            </div>
+            <div class="txti">
+            <div class="txtid">
+                <p>Fast & Accurate</p>
+                <p class="smaller1">Results In Less Than 10s</p1>
+            </div>
+            <div class="txtid">
+                <p>Chess Engine Based</p>
+                <p class="smaller1">Powered by Stockfish</p1>
+            </div>
+            </div>
+        </div>
+        <form action="/index" method="post"><button>ANALYZE YOUR GAME NOW </button></form>
+    </div>
+</body>
+</html>

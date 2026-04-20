@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
+            background-size: 100vw 100vh;
+            background-position: top;
+            background-repeat: no-repeat;
+        }
+        nav{
+            width: 100%;
+            margin-left: 0; 
+            height: 8vh;          
+        }
+         ul{ 
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: 8vh;
+            overflow: hidden;
+           background-color: black; 
+        }
+        li{ 
+            float: right;
+            padding: 8px;
+            margin-top: 2vh;
+            margin-right: 3%;
+            min-height: 1vw;
+            max-height: 3vw;
+            border-radius: 12px;
+            text-align: center;  
+        } 
+        li a{
+            text-decoration: none;
+            color: white;
+            font-size: 1vw;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        li:hover{
+            background-color:rgba(255, 255, 255, 0.5);
+        }
+        li:hover a{
+            color:black;
+        }
+        h3{
+            color:black;
+            width: 95vw;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 2vw;
+            text-align: center;
+            margin: auto;
+            margin-top: 2vh;
+            background-color:rgba(255, 255, 255, 0.8);
+            border:1px solid black;
+            border-top-right-radius: 2vw;
+            border-top-left-radius: 2vw;
+
+        }
+        .sitename{
+            float: left;
+            display: flex;
+            align-items: center;
+            padding-top: 0vh;
+            padding-bottom: 0.5vh;
+            padding-left: 2vw;
+            padding-right: 2vw;
+            color: white;
+            font-size: 1.2vw;
+            margin-top: 1.5vh;
+        }
+        .sitename:hover{
+            background-color:black;
+            color:white;
+        }
+        .sitelogo{
+            width: 2.8vw;
+            height: 2.8vw;
+            margin-right: 1vw;
+            border-radius: 1vh;
+        }
+        .container{
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.5);
+            height:82vh;
+            width: 95vw;
+            border:0.1vh solid black;
+            border-bottom-right-radius: 2vw;
+            border-bottom-left-radius: 2vw;
+            overflow-y: scroll;
+            margin: auto;
+        }
+         
+        .container::-webkit-scrollbar {
+             scrollbar-width: thin;
+            scrollbar-color: black transparent;}
+        .moveimg{
+            width: 15vw;
+            height: 15vw;
+            margin-left: 40vw;
+            margin-bottom: 2vw;
+        }
+        .container dl dt{
+            font-size: 3vw;
+            margin-left: 3vw; 
+
+        }
+        .container dl dd{
+            font-size: 1.3vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            padding: 1vw;
+        }
+        .castle {
+            width: 15vw;
+            height: 15vw;
+            margin-left: 1vw;
+            margin-bottom: 2vw;
+        }
+        .castle1{
+            width: 15vw;
+            height: 15vw;
+            margin-left: 15vw;
+            margin-bottom: 2vw;
+        }
+        .epassant{
+            width: 15vw;
+            height: 15vw;
+            margin-left: 1vw;
+            margin-bottom: 2vw;
+        }
+        .epassant1{
+            width: 15vw;
+            height: 15vw;
+            margin-left: 30vw;
+            margin-bottom: 2vw;
+        }
+        body {
+        opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+         }
+
+        @keyframes fadeIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+   
+    <ul>    
+            <li><a href="{{url_for('contact') }}">ABOUT</a></li>
+        <li><a href="{{url_for('rules') }}">RULES</a></li>
+        <li><a href="{{url_for('pgnguide') }}">PGN-GUIDE</a></li>
+        <li><a href="{{url_for('homepage') }}">HOME</a></li>
+        <li class="sitename"><img class="sitelogo" src="{{ url_for('static', filename='pieces/cheslogoc.png') }}" ><h2>CHESS GAME ANALYZER</h2></li>
+    </ul>
+    </nav>
+    <h3>RULES</h3>
+    <div class="container">
+        <dl><b>
+        <dt>King</dt>
+             <dd>Moves one square in any direction (horizontal, vertical, diagonal).
+             Must avoid moving into check.
+             The game is lost if the king is checkmated.</dd>
+             <img class="moveimg" src="{{url_for('static',filename='pieces/Chess-King-Moves.jpg')}}" alt="King Moves">
+        
+        
+        <dt>Queen</dt>
+           <dd> Moves any number of squares in all directions.
+            Combines the power of rook and bishop.
+            Cannot jump over pieces.</dd>
+            <img class="moveimg" src="{{url_for('static',filename='pieces/Chess-Queen-Moves.jpg')}}" alt="Queen Moves">
+            
+        <dt>Rook</dt>
+
+            <dd>Moves any number of squares horizontally or vertically.
+            Strong in open files and ranks.
+            Also involved in castling.</dd>
+            <img class="moveimg" src="{{url_for('static',filename='pieces/Chess-Rook-Moves.jpg')}}" alt="Rook Moves">
+        <dt>Bishop</dt>
+            <dd>
+            Moves diagonally across the board.
+            Each bishop stays on one color (light or dark).
+            Cannot jump over pieces</dd>
+            <img class="moveimg" src="{{url_for('static',filename='pieces/Chess-Bishop-Moves.jpg')}}" alt="Bishop Moves">
+        <dt>Knight</dt>
+            <dd>
+            Moves in an L-shape (2 squares in one direction, then 1 sideways).
+            Can jump over other pieces.
+            Captures on the square it lands
+        </dd> 
+        <img class="moveimg"src="{{url_for('static',filename='pieces/KnightMoves.jpg')}}" alt="Knight Moves">
+        <dt>Pawn</dt>
+            <dd>Moves forward one square (two squares from starting position).
+            Captures diagonally, not forward.
+            Promotes to another piece upon reaching the last rank.</dd>
+                <img class="moveimg"src="{{url_for('static',filename='pieces/PawnMoves.jpg')}}" alt="Pawn Moves">
+            
+        <dt>Castling</dt>
+
+           <dd> Special move involving king and rook.
+            King moves two squares toward rook; rook moves beside the king.
+            Not allowed if king is in check or pieces have moved before.</dd>
+            <img class="castle1"src="{{url_for('static',filename='pieces/kcb.png')}}" alt="kcb Moves" >
+            <img class="castle" src="{{url_for('static',filename='pieces/kca.png')}}" alt="kca Moves">
+            <img class="castle" src="{{url_for('static',filename='pieces/qcb.png')}}" alt="qcb Moves">
+            <img class="castle" src="{{url_for('static',filename='pieces/qca.png')}}" alt="qca Moves">
+            
+        <dt>En Passant</dt>
+
+           <dd>Special pawn capture.
+            Occurs when an opponent’s pawn moves two squares forward from its starting position.
+            Can be captured as if it moved only one square, but only on the next move.</dd>
+            <img class="epassant1" src="{{url_for('static',filename='pieces/enb.png')}}" alt="enb Moves">
+            <img class="epassant" src="{{url_for('static',filename='pieces/ena.png')}}" alt="ena Moves">
+        </dl></b>
+    </div>
+</body>
+</html>

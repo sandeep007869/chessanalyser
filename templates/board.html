@@ -11,17 +11,13 @@
                 flex-direction: column;
                 align-items: center;
                 }
-        }
-         body {
-            font-family: Arial;
-            padding: 20px;
-        }
+       }
         .body{
             background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100vw 100vh;
         }
-                button {
+        button {
             border: none;
             border-radius: 8px;
             background:rgb(98, 36, 0);
@@ -32,31 +28,28 @@
             transition: 0.1s;
         }
 
-        button:hover {
-            background: #a05e01;
-            transform: scale(1.05);
-        }
-
        .container {
             display: flex;
-            gap: 20px;
             align-items: flex-start;
             flex-wrap: wrap;
-            background-color: blanchedalmond;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-color:rgb(98, 36, 0);
+            width:95% ;      
+            margin-left: 2vw;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-color:black;
             border-style: solid ;
             border-width: 0.1vw;
-            border-radius: 1.5vw;
+            border-bottom-right-radius: 2vw;
+            border-bottom-left-radius: 2vw;
+            height: 75vh;
         }
-
         #board {
             width: 100%;
-            max-width: 600px;   
+            max-width: 550px;   
             aspect-ratio: 1/1; 
-            padding: 3vw;
+            margin-left: 4vw;
+            padding: 1.75vw; 
+            /* padding-bottom: 0vw; */
         }
-
         .moves {
             width: 100%;
             height: 100%;
@@ -73,24 +66,31 @@
             text-align: left;
             position: sticky;
         }
-
         .move:hover {
-            background: rgba(104, 3, 3, 0.232);
+            background: rgba(155, 155, 155, 0.626);
         }
-
-        
-
         button {
             justify-content: center;
             gap: 12px;
-
+            background-color: black;
         }
-         h3{
-            color:rgb(98, 36, 0);
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 3vw;
+        button:hover{
+            background:rgb(86, 86, 86);
+            transform: scale(1.05);
+        }
+        h2{
+            color:black;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 2vw;
+            margin-left: 2vw;
+            margin-top: 2vw;
+            margin-bottom: 0;
             text-align: center;
-            margin: auto;
+            width:95%;
+            border: 0.1vw solid black;
+            background-color:rgba(255, 255, 255, 0.8);
+            border-top-right-radius: 2vw;
+            border-top-left-radius: 2vw;
         }
         .moves-section {
             display: flex;
@@ -98,7 +98,6 @@
             width: 100%;
             max-width: 300px;
         }
-
         .controls {
             display: flex;
             justify-content: center;
@@ -109,30 +108,143 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: rgb(198, 189, 185);
+            background-color: lightgray;
             max-width: 20vw;
-            max-height: 40vw;
-            aspect-ratio: 1/2;
+            max-height: 35vw;
+            aspect-ratio: 1/2.15;
             margin-top: 3vw; 
+            margin-left: 2.5vw;
+            padding: 0.5vw;
+            border:.1vw solid black;
+            border-radius: 1vw;   
+        }
+        .info{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 18vw;
+            max-height: 38.5vw;
+            
+            margin-top: 3vw; 
+            margin-left: 5vw;
             padding: 0.5vw;
             border-color:rgb(98, 36, 0);
             border-radius: 1vw;
-            
+        }
+                nav{
+            width: 100%;
+            margin-left: 0; 
+            height: 8vh;          
+        }
+         ul{ 
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: 8vh;
+            overflow: hidden;
+           background-color: black; 
+        }
+        li{ 
+            float: right;
+            padding: 8px;
+            margin-top: 2vh;
+            margin-right: 3%;
+            min-height: 1vw;
+            max-height: 3vw;
+            border-radius: 12px;
+            text-align: center;  
+        } 
+        li a{
+            text-decoration: none;
+            color: white;
+            font-size: 1vw;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        li:hover{
+            background-color:rgba(255, 255, 255, 0.5);
+        }
+        li:hover a{
+            color:black;
+        }
+        .sitename{
+            float: left;
+            display: flex;
+            align-items: center;
+            padding-top: 0vh;
+            padding-bottom: 0.5vh;
+            padding-left: 2vw;
+            padding-right: 2vw;
+            color: white;
+            font-size: 1.2vw;
+            margin-top: 1.5vh;
+        }
+        .sitename h3{
+            background-color: black;
+            font-size: 1.8vw;
+        }
+        .sitename:hover{
+            background-color:black;
+            color:white;
+        }
+        .sitelogo{
+            width: 2.8vw;
+            height: 2.8vw;
+            margin-right: 1vw;
+            border-radius: 1vh;
+        }
+        h3{
+            color:black;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 1.5vw;
+        }
+        body {
+        opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+         }
+
+        @keyframes fadeIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
         }
 
     </style>
 </head>
 
 <body Class="body">
+    <nav>
+   
+    <ul>
+        
+        <li><a href="{{url_for('contact') }}">ABOUT</a></li>
+        <li><a href="{{url_for('rules') }}">RULES</a></li>
+        <li><a href="{{url_for('pgnguide') }}">PGN-GUIDE</a></li>
+        <li><a href="{{url_for('homepage') }}">HOME</a></li>
+        <li class="sitename"><img class="sitelogo" src="{{ url_for('static', filename='pieces/cheslogoc.png') }}" ><h3 style="color: white;">CHESS GAME ANALYZER</h3></li>
+    </ul>
+</nav>
 
-<h3><B>RESULT</B></h3>
+<h2><B>RESULT</B></h2>
 
 <div class="container" action="/board" method="post" enctype="multipart/form-data">
-    <p>hello everyone here we will put someinfo about <br>something or may be here</p>
+    <div class="info">
+        
+        <dl>
+            <dt><h3>ANALYSIS</h3></dt>
+            <dd><h4>It classifies the moves based on how much advantage changes from the position.</h4></dd>
+            <dt><h3>MOVE CLASSIFICATION</h3></dt><h4>
+            <dd>It classifies moves as best, good, mistake, or blunder to help users improve their gameplay.</dd>
+            <dt><h3>MOVE SYMBOLS</h3></dt>
+                <dd>Best move: ✳️<br> Good move: ☑️<br> Inaccuracy: ❓<br> Mistake: ❌<br> Blunder: 🔴</dd></h4>
+        </dl>
+    </div>
+   
     
     <!-- Chessboard -->
     <div>
-        <div id="board" style="height:40vw ;width: 40vw;"></div>  
+        <div id="board" style="height:35vw ;width: 38vw;"></div>  
     </div>
 
     <!-- Moves list -->
@@ -235,18 +347,18 @@ function renderMoves() {
 
         // Add symbols based on tag
         function getSymbol(tag) {
-            if (tag === "blunder") return " ❌❌";
+            if (tag === "blunder") return " 🔴";
             else if (tag === "mistake") return " ❌";
             else if (tag === "inaccuracy") return " ❓";
-            else if (tag === "good") return " ✅";
-            else if (tag === "best") return " 🌟";
+            else if (tag === "good") return " ☑️";
+            else if (tag === "best") return " ✳️";
             else return "";
         }
         function applyColor(el, tag) {
-            if (tag === "best") el.style.color = "darkgreen";
-            else if (tag === "good") el.style.color = "green";
-            else if (tag === "inaccuracy") el.style.color = "#b59f00";
-            else if (tag === "mistake") el.style.color = "orange";
+            if (tag === "best") el.style.color = "green";
+            else if (tag === "good") el.style.color = "rgb(0, 98, 64)";
+            else if (tag === "inaccuracy") el.style.color = "yellow";
+            else if (tag === "mistake") el.style.color = "rgb(255, 165, 0)";
             else if (tag === "blunder") el.style.color = "red";
         }   
     };

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("{{ url_for('static', filename='pieces/chessbackground.jpg') }}");
+            background-size: 100vw 100vh;
+            background-position: top;
+            background-repeat: no-repeat;
+        }
+        nav{
+            width: 100%;
+            margin-left: 0; 
+            height: 8vh;          
+        }
+         ul{ 
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: 8vh;
+            overflow: hidden;
+           background-color: black; 
+        }
+        li{ 
+            float: right;
+            padding: 8px;
+            margin-top: 2vh;
+            margin-right: 3%;
+            min-height: 1vw;
+            max-height: 3vw;
+            border-radius: 12px;
+            text-align: center;  
+        } 
+        li a{
+            text-decoration: none;
+            color: white;
+            font-size: 1vw;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        li:hover{
+            background-color:rgba(255, 255, 255, 0.5);
+        }
+        li:hover a{
+            color:black;
+        }
+        h3{
+            color:black;
+            width: 95vw;
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 2vw;
+            text-align: center;
+            margin: auto;
+            margin-top: 2vh;
+            background-color:rgba(255, 255, 255, 0.8);
+            border:1px solid black;
+            border-top-right-radius: 2vw;
+            border-top-left-radius: 2vw;
+
+        }
+        .sitename{
+            float: left;
+            display: flex;
+            align-items: center;
+            padding-top: 0vh;
+            padding-bottom: 0.5vh;
+            padding-left: 2vw;
+            padding-right: 2vw;
+            color: white;
+            font-size: 1.2vw;
+            margin-top: 1.5vh;
+        }
+        .sitename:hover{
+            background-color:black;
+            color:white;
+        }
+        .sitelogo{
+            width: 2.8vw;
+            height: 2.8vw;
+            margin-right: 1vw;
+            border-radius: 1vh;
+        }
+        .container{
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.5);
+            height:82vh;
+            width: 95vw;
+            border:0.1vh solid black;
+            border-bottom-right-radius: 2vw;
+            border-bottom-left-radius: 2vw;
+            overflow-y: scroll;
+            margin: auto;
+        }
+         
+        .container::-webkit-scrollbar {
+             scrollbar-width: thin;
+            scrollbar-color: black transparent;}
+         .menuimg{
+            width: 15vw;
+            height: 20vw;
+            margin-left: 40vw;
+            margin-bottom: 2vw;
+        }
+        .container dl dt{
+            font-size: 1.3vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            padding: 1vw;
+        }
+       .pathimg{
+            width: 40vw;
+            height: 20vw;
+            margin-left: 27vw;
+            margin-bottom: 2vw;
+        }
+        body {
+        opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+         }
+
+        @keyframes fadeIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+   
+    <ul>    
+        <li><a href="{{url_for('contact') }}">ABOUT</a></li>
+        <li><a href="{{url_for('rules') }}">RULES</a></li>
+        <li><a href="{{url_for('pgnguide') }}">PGN-GUIDE</a></li>
+        <li><a href="{{url_for('homepage') }}">HOME</a></li>
+        <li class="sitename"><img class="sitelogo" src="{{ url_for('static', filename='pieces/cheslogoc.png') }}" ><h2>CHESS GAME ANALYZER</h2></li>
+    </ul>
+    </nav>
+    <h3>LICHESS.ORG PGN DOWNLOAD GUIDE</h3>
+    <div class="container">
+        <dl>
+            <dt>
+                <b>STEP 1: Go to lichess.org and log in to your account or play without logging in.</b>
+            </dt>
+            <dt>
+                ,<b>STEP 2: Once you have played a game , go to analyze button shown on the right of the board
+            </dt>
+             <img class="menuimg" src="{{ url_for('static', filename='pieces/lichessmenu.png') }}" >
+            <dt>
+                STEP 3: Scroll down on this page and click on "Download PGN"
+                 button shown on the bottom left.
+            </dt>
+            <img class="pathimg" src="{{ url_for('static', filename='pieces/lichesspgn.png') }}" >
+            <dt>
+                STEP 4: You can copy and paste this PGN into a text file or directly 
+                download the file as it is in your system.</b>
+            </dt>
+        </dl>
+    </div>
+</body>
+</html>

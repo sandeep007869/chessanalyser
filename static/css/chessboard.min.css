@@ -5,8 +5,9 @@
 }
 
 .board-b72b1 {
-  border: 2px solid #404040;
+  border: .45vw solid #000000;
   box-sizing: content-box;
+  border-radius: .6vw ;
 }
 
 .square-55d63 {
@@ -23,12 +24,12 @@
 }
 
 .white-1e1d7 {
-  background-color: #f0d9b5;
+  background-color: lightgray;
   color: #b58863;
 }
 
 .black-3c85d {
-  background-color: #b58863;
+  background-color: darkgray;
   color: #f0d9b5;
 }
 
