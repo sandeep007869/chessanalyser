@@ -30,10 +30,11 @@ def pgnguide():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
-@app.route("/chess.com pgn guide")
+@app.route("/chess.compgnguide")
 def chessp():
     return render_template("chessp.html")
-@app.route("/lichess.com pgn guide")
+@app.route("/lichess.compgnguide")
+
 def lichessp():
     return render_template("lichessp.html")
 
